@@ -64,7 +64,7 @@ router.get("/:id", userController.getUser);
  *     tags:
  *       - Users
  *     summary: Create a new user
- *     description: Creates a new user record.
+ *     description: Creates a new user account.
  *     requestBody:
  *       required: true
  *       content:
@@ -72,16 +72,77 @@ router.get("/:id", userController.getUser);
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - firstName
+ *               - lastName
+ *               - email
+ *               - password
+ *               - roleId
+ *               - companyId
  *             properties:
- *               name:
+ *               firstName:
  *                 type: string
- *                 example: Ali
+ *                 example: Ahmed
+ *               lastName:
+ *                 type: string
+ *                 example: Khan
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: ahmed@example.com
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 example: Password@123
+ *               roleId:
+ *                 type: integer
+ *                 example: 1
+ *               companyId:
+ *                 type: integer
+ *                 example: 1
  *     responses:
  *       201:
  *         description: User created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 firstName:
+ *                   type: string
+ *                   example: Ahmed
+ *                 lastName:
+ *                   type: string
+ *                   example: Khan
+ *                 email:
+ *                   type: string
+ *                   example: ahmed@example.com
+ *                 roleId:
+ *                   type: integer
+ *                   example: 1
+ *                 companyId:
+ *                   type: integer
+ *                   example: 1
+ *                 isActive:
+ *                   type: boolean
+ *                   example: true
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *       400:
+ *         description: Invalid request body.
+ *       500:
+ *         description: Internal server error.
  */
 router.post("/", userController.createUser);
+
+
+
 
 /**
  * @openapi

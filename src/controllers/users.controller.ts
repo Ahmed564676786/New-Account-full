@@ -22,9 +22,25 @@ export const getUser = async (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    roleId,
+    companyId,
+  } = req.body;
 
-  const user = await userService.createUser(name, email, password);
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = await userService.createUser(
+    firstName,
+    lastName,
+    email,
+    passwordHash,
+    roleId,
+    companyId
+  );
 
   res.status(201).json(user);
 };

@@ -1,10 +1,6 @@
 import { db } from "../config/db.js";
-
 import { userRole } from "../db/schema/user-role.js";
-
 import { eq } from "drizzle-orm";
-
-
 
 
 // Get all roles
@@ -21,9 +17,6 @@ export const getAllRoles = async () => {
 };
 
 
-
-
-
 // Get role by ID
 export const getRoleById = async (
 
@@ -32,19 +25,14 @@ export const getRoleById = async (
 ) => {
 
 
-  const result = await db.query.userRole.findFirst({
+const result = await db.query.userRole.findFirst({
 
     where: eq(userRole.id, id),
-
     with: {
-
       users: true,
-
     },
 
   });
-
-
 
   return result ?? null;
 
